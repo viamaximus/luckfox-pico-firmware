@@ -1,0 +1,21 @@
+# udev rules for Luckfox Pico serial and ADB access
+# Copy this file to /etc/udev/rules.d/ and reload udev rules
+
+# Common USB-to-serial adapters (FTDI, CH340, CP210x, etc.)
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", MODE="0666", GROUP="dialout"  # FTDI
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", MODE="0666", GROUP="dialout"  # CH340
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", MODE="0666", GROUP="dialout"  # CP210x
+SUBSYSTEM=="tty", ATTRS{idVendor}=="067b", MODE="0666", GROUP="dialout"  # Prolific
+
+# Rockchip devices (Luckfox uses RV1103 - Rockchip SoC)
+# Serial access
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2207", MODE="0666", GROUP="dialout"
+
+# ADB access
+SUBSYSTEM=="usb", ATTR{idVendor}=="2207", MODE="0666", GROUP="plugdev", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTR{idVendor}=="2207", ATTR{idProduct}=="0006", SYMLINK+="android_adb"
+SUBSYSTEM=="usb", ATTR{idVendor}=="2207", ATTR{idProduct}=="0006", SYMLINK+="android%n"
+
+# Generic rule for all USB serial devices (fallback)
+KERNEL=="ttyUSB[0-9]*", MODE="0666", GROUP="dialout"
+KERNEL=="ttyACM[0-9]*", MODE="0666", GROUP="dialout"

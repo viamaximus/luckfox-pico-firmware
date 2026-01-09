@@ -8,3 +8,4 @@ Memory: 64MB DDR2
 1 x USB 2.0 Host/Device
 SPI NAND 128MB
 
+vim is dumb

@@ -8,4 +8,10 @@ Memory: 64MB DDR2
 1 x USB 2.0 Host/Device
 SPI NAND 128MB
 
-vim is dumb
+NOTE: Environment Variables
+
+    The cross-compilation toolchain needs to be set Environment Variables
+
+cd {SDK_PATH}/tools/linux/toolchain/arm-rockchip830-linux-uclibcgnueabihf/
+source env_install_toolchain.sh
+
